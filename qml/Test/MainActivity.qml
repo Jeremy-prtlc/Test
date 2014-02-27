@@ -182,6 +182,18 @@ Rectangle {
     ListModel {
         id: listModelModel_galleryGridListView_mainLayout
         objectName: "listModelModel_galleryGridListView_mainLayout"
+        ListElement {
+            src: "../../res/pictures/fond-ecrab-hd-ipad-4.jpg"
+        }
+        ListElement {
+            src: "../../res/pictures/Prince-Fielder-MLB-Hd.jpg"
+        }
+        ListElement {
+            src: "../../res/downloads/Florida+Marlins+v+Washington+Nationals+u07HD4y2lI7l.jpg"
+        }
+        ListElement {
+            src: "../../res/downloads/728410-gt_mlb12theshow_vr_saa_hd.jpg"
+        }
     }
 
     Component {

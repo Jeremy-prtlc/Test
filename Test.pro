@@ -1,7 +1,11 @@
 # Add more folders to ship with the application, here
-folder_01.source = qml/Test
-folder_01.target = qml
-DEPLOYMENTFOLDERS = folder_01
+Qml.source = qml/Test
+Qml.target = qml
+Ressources.source = res
+Ressources.target = ./
+Android.source = android
+Android.target = ./
+DEPLOYMENTFOLDERS = Qml Ressources Android
 
 # Additional import path used to resolve QML modules in Creator's code model
 QML_IMPORT_PATH =
@@ -27,11 +31,6 @@ HEADERS += \
 FORMS +=
 
 OTHER_FILES += \
-    ../../../Downloads/gallery.png \
-    ../../../Downloads/wtemp.png \
-    res/gallery.png \
-    res/leftarrow.png \
-    res/wtemp.png \
     res/images/Android-HD-Wallpapers-43.jpg \
     res/wallpaper/3d-hd.jpg \
     res/wallpaper/Beach wallpaper hd (1920 x 1200).jpg \
@@ -53,6 +52,9 @@ OTHER_FILES += \
     res/downloads/images/Android-HD-Wallpapers-43.jpg \
     res/pictures/fond-ecrab-hd-ipad-4.jpg \
     res/pictures/Prince-Fielder-MLB-Hd.jpg \
-    android/AndroidManifest.xml
+    android/AndroidManifest.xml \
+    res/gallery.png \
+    res/leftarrow.png \
+    res/wtemp.png
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android

@@ -1,7 +1,5 @@
 #include "wtemp.h"
 
-Wtemp::Wtemp(QObject *parent) : QObject(parent) {}
-
 Wtemp::Wtemp(QString src) {
     this->src = src;
     this->name = src; // remove the suffix extension : TODO

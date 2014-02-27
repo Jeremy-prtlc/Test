@@ -22,7 +22,7 @@ int main(int argc, char *argv[]) {
     qDebug() << main->listToString();
     qDebug() << main->getRoot()->objectName();
 
-
+/*
     WtempModel wtempModel;
     // crée un itérateur sur la liste des images
     QListIterator<Wtemp*> qlitw(*main->getList());
@@ -36,7 +36,7 @@ int main(int argc, char *argv[]) {
     main->getRoot()
             ->findChild<QQuickView*>("multiView_mainLayout")
             ->setProperty("model", QVariant::fromValue((QString)"listModelModel_galleryGridListView_mainLayout"));
-
+*/
     /** TODO :
      * ajouter les images récupérées dans la liste à la GridView du layout (via ListModel->ListElement)
      * ajouter la gestion de l'affichage : liste, grille, galerie au layout

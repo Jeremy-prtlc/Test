@@ -5,12 +5,9 @@
 #include <QQuickItem>
 #include <QAbstractListModel>
 
-class Wtemp : public QObject {
-
-     Q_OBJECT
+class Wtemp {
 
 public:
-    explicit Wtemp(QObject* parent = 0);
     explicit Wtemp(QString src);
     QString getSrc();
     QString getName();
