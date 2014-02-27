@@ -57,15 +57,15 @@ Rectangle {
     Text {
         id: appName_mainLayout
         objectName: "appName_mainLayout"
-        width: mainLayout.width - (backArrow_mainLayout.width + logo_mainLayout.width + iconGallery_mainLayout.width)
+        width: mainLayout.width - (backArrowListener_mainLayout.width + iconGalleryListener_mainLayout.width + 20)
         height: logo_mainLayout.height
-        color: "#2f4eb7"
-        text: qsTr("Name")
+        color: "#307dd7"
+        text: qsTr("WtempViewer Cross-platform app")
         font.bold: false
         font.family: "Verdana"
         style: Text.Normal
         styleColor: "#3d5db8"
-        wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+        wrapMode: Text.WordWrap
         horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
         anchors.left: logo_mainLayout.right
@@ -73,6 +73,7 @@ Rectangle {
         anchors.top: parent.top
         anchors.topMargin: 0
         font.pixelSize: 12
+
     }
 
     Image {
@@ -84,7 +85,7 @@ Rectangle {
         anchors.top: parent.top
         anchors.topMargin: 0
         anchors.right: parent.right
-        anchors.rightMargin: 20
+        anchors.rightMargin: 0
         fillMode: Image.PreserveAspectFit
         source: "../../res/gallery.png"
     }
@@ -100,81 +101,104 @@ Rectangle {
         anchors.right: iconGallery_mainLayout.right
         anchors.rightMargin: 0
         onClicked: {
-            listViewGallery_mainLayout.visible = !listViewGallery_mainLayout.visible
+            listViewGalleryBackground_mainLayout.visible = !listViewGalleryBackground_mainLayout.visible
         }
     }
 
-    ListView {
-        id: listViewGallery_mainLayout
-        objectName: "listViewGallery_mainLayout"
-        x: 226
+    Rectangle {
+        id: listViewGalleryBackground_mainLayout
+        objectName: "listViewGalleryBackground_mainLayout"
+        color: "#444444"
+        border.color: "#666666"
+        border.width: 1
         width: 80
-        height: 60
+        height: listModelModel_listViewGallery_mainLayout.count * (25+3)
+        x:226
         z: 100
-        spacing: 0
-        snapMode: ListView.NoSnap
-        keyNavigationWraps: false
-        flickableDirection: Flickable.AutoFlickDirection
-        visible: false
         anchors.top: iconGallery_mainLayout.bottom
         anchors.topMargin: 0
         anchors.right: iconGallery_mainLayout.right
         anchors.rightMargin: 0
-        ExclusiveGroup { id: exclusiveGroup_radioButton_itemDelegate_listViewGallery_mainLayout }
-        delegate: Item {
-            id: itemDelegate_listViewGallery_mainLayout
-            objectName: "itemDelegate_listViewGallery_mainLayout"
-            x: 0
-            width: 80
-            height: 20
-            RadioButton {
-                id: radioButton_itemDelegate_listViewGallery_mainLayout
-                objectName: "radioButton_itemDelegate_listViewGallery_mainLayout"
-                exclusiveGroup: exclusiveGroup_radioButton_itemDelegate_listViewGallery_mainLayout
-                width: 20
-                height: 20
-                anchors.top: parent.top
-                anchors.topMargin: 0
-                anchors.left: parent.left
-                anchors.leftMargin: 0
-                activeFocusOnPress: true
-                checked: false | text_itemDelegate_listViewGallery_mainLayout.focus
-                onClicked: {
-                    listViewGallery_mainLayout.visible = false
+        visible: false
+        ListView {
+            id: listViewGallery_mainLayout
+            objectName: "listViewGallery_mainLayout"
+            width: parent.width
+            height: parent.height
+            spacing: 3
+            snapMode: ListView.NoSnap
+            keyNavigationWraps: false
+            flickableDirection: Flickable.AutoFlickDirection
+            visible: parent.visible
+            ExclusiveGroup { id: exclusiveGroup_radioButton_itemDelegate_listViewGallery_mainLayout }
+            delegate: Item {
+                id: itemDelegate_listViewGallery_mainLayout
+                objectName: "itemDelegate_listViewGallery_mainLayout"
+                x: 5
+                width: listViewGallery_mainLayout.width
+                height: 25
+                RadioButton {
+                    id: radioButton_itemDelegate_listViewGallery_mainLayout
+                    objectName: "radioButton_itemDelegate_listViewGallery_mainLayout"
+                    exclusiveGroup: exclusiveGroup_radioButton_itemDelegate_listViewGallery_mainLayout
+                    width: 20
+                    height: parent.height
+                    anchors.top: parent.top
+                    anchors.topMargin: 0
+                    anchors.left: parent.left
+                    anchors.leftMargin: 0
+                    activeFocusOnPress: true
+                    checked: false
+                    onCheckedChanged: {
+                        listViewGalleryBackground_mainLayout.visible = false
+                    }
+                }
+                Text {
+                    id: text_itemDelegate_listViewGallery_mainLayout
+                    objectName: "text_itemDelegate_listViewGallery_mainLayout"
+                    width: listViewGallery_mainLayout.width - radioButton_itemDelegate_listViewGallery_mainLayout.width
+                    height: parent.height
+                    color: "#2f4eb7"
+                    text: qsTr(name)
+                    font.bold: false
+                    font.family: "Verdana"
+                    style: Text.Normal
+                    styleColor: "#3d5db8"
+                    wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+                    horizontalAlignment: Text.AlignLeft
+                    verticalAlignment: Text.AlignVCenter
+                    anchors.left: radioButton_itemDelegate_listViewGallery_mainLayout.right
+                    anchors.leftMargin: 0
+                    anchors.top: radioButton_itemDelegate_listViewGallery_mainLayout.top
+                    anchors.topMargin: 0
+                    font.pixelSize: 12
+                    MouseArea {
+                        id: textListener_itemDelegate_listViewGallery_mainLayout
+                        objectName: "textListener_itemDelegate_listViewGallery_mainLayout"
+                        width: parent.width
+                        height: parent.height
+                        anchors.top: parent.top
+                        anchors.topMargin: 0
+                        anchors.left: parent.left
+                        anchors.leftMargin: 0
+                        onClicked: {
+                            radioButton_itemDelegate_listViewGallery_mainLayout.checked = true
+                        }
+                    }
                 }
             }
-            Text {
-                id: text_itemDelegate_listViewGallery_mainLayout
-                objectName: "text_itemDelegate_listViewGallery_mainLayout"
-                width: 60
-                height: 20
-                color: "#2f4eb7"
-                text: qsTr(name)
-                font.bold: false
-                font.family: "Verdana"
-                style: Text.Normal
-                styleColor: "#3d5db8"
-                wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-                horizontalAlignment: Text.AlignLeft
-                verticalAlignment: Text.AlignVCenter
-                anchors.left: radioButton_itemDelegate_listViewGallery_mainLayout.right
-                anchors.leftMargin: 0
-                anchors.top: radioButton_itemDelegate_listViewGallery_mainLayout.top
-                anchors.topMargin: 0
-                font.pixelSize: 12
-            }
-        }
-        model: ListModel {
-            id: listModelModel_listViewGallery_mainLayout
-            objectName: "listModelModel_listViewGallery_mainLayout"
-            ListElement {
-                name: "Gallery"
-            }
-            ListElement {
-                name: "Grid"
-            }
-            ListElement {
-                name: "List"
+            model: ListModel {
+                id: listModelModel_listViewGallery_mainLayout
+                objectName: "listModelModel_listViewGallery_mainLayout"
+                ListElement {
+                    name: "Gallery"
+                }
+                ListElement {
+                    name: "Grid"
+                }
+                ListElement {
+                    name: "List"
+                }
             }
         }
     }
