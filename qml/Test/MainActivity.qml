@@ -13,8 +13,8 @@ Rectangle {
     Image {
         id: backArrow_mainLayout
         objectName: "backArrow_mainLayout"
-        width: 20
-        height: 40
+        width: mainLayout.width/15
+        height: width*2
         visible: true
         anchors.left: parent.left
         anchors.leftMargin: 0
@@ -26,11 +26,11 @@ Rectangle {
     Image {
         id: logo_mainLayout
         objectName: "logo_mainLayout"
-        width: backArrow_mainLayout * 2
-        height: backArrow_mainLayout.height
-        anchors.left: parent.left
-        anchors.leftMargin: 20
-        anchors.top: parent.top
+        width: backArrow_mainLayout.height
+        height: width
+        anchors.left: backArrow_mainLayout.right
+        anchors.leftMargin: 0
+        anchors.top: backArrow_mainLayout.top
         anchors.topMargin: 0
         fillMode: Image.PreserveAspectFit
         source: "../../res/wtemp.png"
@@ -54,37 +54,15 @@ Rectangle {
         }
     }
 
-    Text {
-        id: appName_mainLayout
-        objectName: "appName_mainLayout"
-        width: mainLayout.width - (backArrowListener_mainLayout.width + iconGalleryListener_mainLayout.width + 20)
-        height: logo_mainLayout.height
-        color: "#307dd7"
-        text: qsTr("WtempViewer Cross-platform app")
-        font.bold: false
-        font.family: "Verdana"
-        style: Text.Normal
-        styleColor: "#3d5db8"
-        wrapMode: Text.WordWrap
-        horizontalAlignment: Text.AlignLeft
-        verticalAlignment: Text.AlignVCenter
-        anchors.left: logo_mainLayout.right
-        anchors.leftMargin: 10
-        anchors.top: parent.top
-        anchors.topMargin: 0
-        font.pixelSize: 12
-
-    }
-
     Image {
         id: iconGallery_mainLayout
         objectName: "iconGallery_mainLayout"
-        x: 460
+        /*x: 460*/
         width: logo_mainLayout.width
         height: logo_mainLayout.height
-        anchors.top: parent.top
+        anchors.top: logo_mainLayout.top
         anchors.topMargin: 0
-        anchors.right: parent.right
+        anchors.right: mainLayout.right
         anchors.rightMargin: 0
         fillMode: Image.PreserveAspectFit
         source: "../../res/gallery.png"
@@ -103,6 +81,27 @@ Rectangle {
         onClicked: {
             listViewGalleryBackground_mainLayout.visible = !listViewGalleryBackground_mainLayout.visible
         }
+    }
+
+    Text {
+        id: appName_mainLayout
+        objectName: "appName_mainLayout"
+        width: mainLayout.width - (backArrowListener_mainLayout.width + iconGalleryListener_mainLayout.width + anchors.leftMargin)
+        height: logo_mainLayout.height
+        color: "#307dd7"
+        text: qsTr("WtempViewer Cross-platform app")
+        font.bold: false
+        font.family: "Verdana"
+        style: Text.Normal
+        styleColor: "#3d5db8"
+        wrapMode: Text.WordWrap
+        horizontalAlignment: Text.AlignLeft
+        verticalAlignment: Text.AlignVCenter
+        anchors.left: logo_mainLayout.right
+        anchors.leftMargin: 10
+        anchors.top: logo_mainLayout.top
+        anchors.topMargin: 0
+        font.pixelSize: 24
     }
 
     Rectangle {
@@ -203,7 +202,7 @@ Rectangle {
         }
     }
 
-    ListModel {
+    /*ListModel {
         id: listModelModel_galleryGridListView_mainLayout
         objectName: "listModelModel_galleryGridListView_mainLayout"
         ListElement {
@@ -218,7 +217,7 @@ Rectangle {
         ListElement {
             src: "../../res/downloads/728410-gt_mlb12theshow_vr_saa_hd.jpg"
         }
-    }
+    }*/
 
     Component {
         id: componentDelegate_galleryGridListView_mainLayout
