@@ -2,9 +2,9 @@
 Qml.source = qml/Test
 Qml.target = qml
 Ressources.source = res
-Ressources.target = qml/Test
+Ressources.target = ./
 Android.source = android
-Android.target = qml/Test
+Android.target = ./
 DEPLOYMENTFOLDERS = Qml Ressources Android
 
 # Additional import path used to resolve QML modules in Creator's code model

@@ -124,7 +124,7 @@ Rectangle {
             id: itemDelegate_listViewGallery_mainLayout
             objectName: "itemDelegate_listViewGallery_mainLayout"
             width: listViewGalleryBackground_mainLayout.width
-            height: listViewGalleryBackground_mainLayout.height / listModelModel_listViewGallery_mainLayout.count - 3
+            height: listViewGalleryBackground_mainLayout.height / listModelModel_listViewGallery_mainLayout.count - 5
             RadioButton {
                 id: radioButton_itemDelegate_listViewGallery_mainLayout
                 objectName: "radioButton_itemDelegate_listViewGallery_mainLayout"
@@ -134,7 +134,7 @@ Rectangle {
                 anchors.top: itemDelegate_listViewGallery_mainLayout.top
                 anchors.topMargin: 0
                 anchors.left: itemDelegate_listViewGallery_mainLayout.left
-                anchors.leftMargin: 0
+                anchors.leftMargin: 5
                 activeFocusOnPress: true
                 checked: false
                 onCheckedChanged: {
@@ -155,10 +155,10 @@ Rectangle {
                 wrapMode: Text.Wrap
                 horizontalAlignment: Text.AlignLeft
                 verticalAlignment: Text.AlignVCenter
-                anchors.left: radioButton_itemDelegate_listViewGallery_mainLayout.right
-                anchors.leftMargin: 10
                 anchors.top: radioButton_itemDelegate_listViewGallery_mainLayout.top
                 anchors.topMargin: 0
+                anchors.left: radioButton_itemDelegate_listViewGallery_mainLayout.right
+                anchors.leftMargin: 20
                 font.pixelSize: 16
                 MouseArea {
                     id: textListener_itemDelegate_listViewGallery_mainLayout
@@ -188,10 +188,11 @@ Rectangle {
             }
             return max;
         }
-        x: 5
         property int length: listViewGalleryBackground_mainLayout.max() * 15
         width: 20 + length
-        height: listModelModel_listViewGallery_mainLayout.count * (25+3)
+        height: listModelModel_listViewGallery_mainLayout.count * (25+5)
+        x: 5
+        z: 100
         color: "#444444"
         border.color: "#666666"
         border.width: 1
@@ -216,23 +217,6 @@ Rectangle {
         }
     }
 
-    /*ListModel {
-        id: listModelModel_galleryGridListView_mainLayout
-        objectName: "listModelModel_galleryGridListView_mainLayout"
-        ListElement {
-            src: "../../res/pictures/fond-ecrab-hd-ipad-4.jpg"
-        }
-        ListElement {
-            src: "../../res/pictures/Prince-Fielder-MLB-Hd.jpg"
-        }
-        ListElement {
-            src: "../../res/downloads/Florida+Marlins+v+Washington+Nationals+u07HD4y2lI7l.jpg"
-        }
-        ListElement {
-            src: "../../res/downloads/728410-gt_mlb12theshow_vr_saa_hd.jpg"
-        }
-    }*/
-
     Component {
         id: componentDelegate_galleryGridListView_mainLayout
         Item {
@@ -243,8 +227,8 @@ Rectangle {
             Image {
                 id: image_item_componentDelegate_galleryGridListView_mainLayout
                 objectName: "image_item_componentDelegate_galleryGridListView_mainLayout"
-                width: parent.width
-                height: parent.height
+                width: item_componentDelegate_galleryGridListView_mainLayout.width
+                height: item_componentDelegate_galleryGridListView_mainLayout.height
                 visible: true
                 anchors.left: item_componentDelegate_galleryGridListView_mainLayout.left
                 anchors.leftMargin: 0
@@ -264,15 +248,15 @@ Rectangle {
         id: multiView_mainLayout
         objectName: "multiView_mainLayout"
         contentHeight: 70
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 0
-        anchors.right: parent.right
-        anchors.rightMargin: 0
         anchors.top: logo_mainLayout.bottom
         anchors.topMargin: 10
-        anchors.left: parent.left
+        anchors.bottom: mainLayout.bottom
+        anchors.bottomMargin: 0
+        anchors.right: mainLayout.right
+        anchors.rightMargin: 0
+        anchors.left: mainLayout.left
         anchors.leftMargin: 0
-        cellWidth: parent.width/4
+        cellWidth: mainLayout.width/4
         cellHeight: cellWidth
         model: listModelModel_galleryGridListView_mainLayout
         delegate: componentDelegate_galleryGridListView_mainLayout

@@ -12,7 +12,7 @@ int main(int argc, char *argv[]) {
     // Instancie la liste des images.
     MainActivity* main = new MainActivity();
     // parcours le dossier path et récupère les fichiers à partir du chemin et filtre précisé.
-    main->findWtemp("../Test", (QStringList() << "*.jpg" << "*.png" << "*.bmp" << "*.gif"));
+    main->findWtemp("./", (QStringList() << "*.jpg" << "*.png" << "*.bmp" << "*.gif"));
     // affiche dans le log le contenue de la liste des images trouvées.
     qDebug() << main->listToString();
 
