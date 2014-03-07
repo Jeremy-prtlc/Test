@@ -1,8 +1,7 @@
 #include "mainactivity.h"
 
-MainActivity::MainActivity(QQuickItem* root, QList<Wtemp*>* list) {
-    this->root = root;
-    this->list = list;
+MainActivity::MainActivity(QList<Wtemp*>* list)
+    : list(list) {
 }
 
 void MainActivity::findWtemp(QString path, QStringList filter) {
@@ -31,10 +30,6 @@ QString MainActivity::listToString () {
         tmp.append(lit.next()->getSrc()).append("\n");
     }
     return tmp;
-}
-
-QQuickItem* MainActivity::getRoot() {
-    return root;
 }
 
 QList<Wtemp*>* MainActivity::getList() {

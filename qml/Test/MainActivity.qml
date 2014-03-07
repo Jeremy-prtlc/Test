@@ -13,7 +13,7 @@ Rectangle {
     Image {
         id: backArrow_mainLayout
         objectName: "backArrow_mainLayout"
-        width: mainLayout.width/15
+        width: mainLayout.width * 8/100
         height: width*2
         visible: true
         anchors.left: parent.left
@@ -104,16 +104,97 @@ Rectangle {
         font.pixelSize: 24
     }
 
+    ListModel {
+        id: listModelModel_listViewGallery_mainLayout
+        objectName: "listModelModel_listViewGallery_mainLayout"
+        ListElement {
+            name: "Gallery"
+        }
+        ListElement {
+            name: "Grid"
+        }
+        ListElement {
+            name: "List"
+        }
+    }
+
+    Component {
+        id: componentDelegate_listViewGallery_mainLayout
+        Item {
+            id: itemDelegate_listViewGallery_mainLayout
+            objectName: "itemDelegate_listViewGallery_mainLayout"
+            width: listViewGalleryBackground_mainLayout.width
+            height: listViewGalleryBackground_mainLayout.height / listModelModel_listViewGallery_mainLayout.count - 3
+            RadioButton {
+                id: radioButton_itemDelegate_listViewGallery_mainLayout
+                objectName: "radioButton_itemDelegate_listViewGallery_mainLayout"
+                exclusiveGroup: exclusiveGroup_radioButton_itemDelegate_listViewGallery_mainLayout
+                width: itemDelegate_listViewGallery_mainLayout.width - listViewGalleryBackground_mainLayout.length
+                height: itemDelegate_listViewGallery_mainLayout.height
+                anchors.top: itemDelegate_listViewGallery_mainLayout.top
+                anchors.topMargin: 0
+                anchors.left: itemDelegate_listViewGallery_mainLayout.left
+                anchors.leftMargin: 0
+                activeFocusOnPress: true
+                checked: false
+                onCheckedChanged: {
+                    listViewGalleryBackground_mainLayout.visible = false
+                }
+            }
+            Text {
+                id: text_itemDelegate_listViewGallery_mainLayout
+                objectName: "text_itemDelegate_listViewGallery_mainLayout"
+                width:  listViewGalleryBackground_mainLayout.length
+                height: itemDelegate_listViewGallery_mainLayout.height
+                color: "#2f4eb7"
+                text: qsTr(name)
+                font.bold: false
+                font.family: "Verdana"
+                style: Text.Normal
+                styleColor: "#3d5db8"
+                wrapMode: Text.Wrap
+                horizontalAlignment: Text.AlignLeft
+                verticalAlignment: Text.AlignVCenter
+                anchors.left: radioButton_itemDelegate_listViewGallery_mainLayout.right
+                anchors.leftMargin: 10
+                anchors.top: radioButton_itemDelegate_listViewGallery_mainLayout.top
+                anchors.topMargin: 0
+                font.pixelSize: 16
+                MouseArea {
+                    id: textListener_itemDelegate_listViewGallery_mainLayout
+                    objectName: "textListener_itemDelegate_listViewGallery_mainLayout"
+                    width: text_itemDelegate_listViewGallery_mainLayout.width
+                    height: text_itemDelegate_listViewGallery_mainLayout.height
+                    anchors.top: text_itemDelegate_listViewGallery_mainLayout.top
+                    anchors.topMargin: 0
+                    anchors.left: text_itemDelegate_listViewGallery_mainLayout.left
+                    anchors.leftMargin: 0
+                    onClicked: {
+                        radioButton_itemDelegate_listViewGallery_mainLayout.checked = true
+                    }
+                }
+            }
+        }
+    }
+
     Rectangle {
         id: listViewGalleryBackground_mainLayout
         objectName: "listViewGalleryBackground_mainLayout"
+        function max() {
+            var max = 1;
+            for(var i=0; i<listModelModel_listViewGallery_mainLayout.count; i++) {
+                var tmp = listModelModel_listViewGallery_mainLayout.get(i).name.length;
+                max = (max<tmp)? tmp: max;
+            }
+            return max;
+        }
+        x: 5
+        property int length: listViewGalleryBackground_mainLayout.max() * 15
+        width: 20 + length
+        height: listModelModel_listViewGallery_mainLayout.count * (25+3)
         color: "#444444"
         border.color: "#666666"
         border.width: 1
-        width: 80
-        height: listModelModel_listViewGallery_mainLayout.count * (25+3)
-        x:226
-        z: 100
         anchors.top: iconGallery_mainLayout.bottom
         anchors.topMargin: 0
         anchors.right: iconGallery_mainLayout.right
@@ -122,83 +203,16 @@ Rectangle {
         ListView {
             id: listViewGallery_mainLayout
             objectName: "listViewGallery_mainLayout"
-            width: parent.width
-            height: parent.height
+            width: listViewGalleryBackground_mainLayout.width
+            height: listViewGalleryBackground_mainLayout.height
             spacing: 3
             snapMode: ListView.NoSnap
             keyNavigationWraps: false
             flickableDirection: Flickable.AutoFlickDirection
             visible: parent.visible
             ExclusiveGroup { id: exclusiveGroup_radioButton_itemDelegate_listViewGallery_mainLayout }
-            delegate: Item {
-                id: itemDelegate_listViewGallery_mainLayout
-                objectName: "itemDelegate_listViewGallery_mainLayout"
-                x: 5
-                width: listViewGallery_mainLayout.width
-                height: 25
-                RadioButton {
-                    id: radioButton_itemDelegate_listViewGallery_mainLayout
-                    objectName: "radioButton_itemDelegate_listViewGallery_mainLayout"
-                    exclusiveGroup: exclusiveGroup_radioButton_itemDelegate_listViewGallery_mainLayout
-                    width: 20
-                    height: parent.height
-                    anchors.top: parent.top
-                    anchors.topMargin: 0
-                    anchors.left: parent.left
-                    anchors.leftMargin: 0
-                    activeFocusOnPress: true
-                    checked: false
-                    onCheckedChanged: {
-                        listViewGalleryBackground_mainLayout.visible = false
-                    }
-                }
-                Text {
-                    id: text_itemDelegate_listViewGallery_mainLayout
-                    objectName: "text_itemDelegate_listViewGallery_mainLayout"
-                    width: listViewGallery_mainLayout.width - radioButton_itemDelegate_listViewGallery_mainLayout.width
-                    height: parent.height
-                    color: "#2f4eb7"
-                    text: qsTr(name)
-                    font.bold: false
-                    font.family: "Verdana"
-                    style: Text.Normal
-                    styleColor: "#3d5db8"
-                    wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-                    horizontalAlignment: Text.AlignLeft
-                    verticalAlignment: Text.AlignVCenter
-                    anchors.left: radioButton_itemDelegate_listViewGallery_mainLayout.right
-                    anchors.leftMargin: 0
-                    anchors.top: radioButton_itemDelegate_listViewGallery_mainLayout.top
-                    anchors.topMargin: 0
-                    font.pixelSize: 12
-                    MouseArea {
-                        id: textListener_itemDelegate_listViewGallery_mainLayout
-                        objectName: "textListener_itemDelegate_listViewGallery_mainLayout"
-                        width: parent.width
-                        height: parent.height
-                        anchors.top: parent.top
-                        anchors.topMargin: 0
-                        anchors.left: parent.left
-                        anchors.leftMargin: 0
-                        onClicked: {
-                            radioButton_itemDelegate_listViewGallery_mainLayout.checked = true
-                        }
-                    }
-                }
-            }
-            model: ListModel {
-                id: listModelModel_listViewGallery_mainLayout
-                objectName: "listModelModel_listViewGallery_mainLayout"
-                ListElement {
-                    name: "Gallery"
-                }
-                ListElement {
-                    name: "Grid"
-                }
-                ListElement {
-                    name: "List"
-                }
-            }
+            delegate: componentDelegate_listViewGallery_mainLayout
+            model: listModelModel_listViewGallery_mainLayout
         }
     }
 

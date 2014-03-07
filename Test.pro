@@ -2,9 +2,9 @@
 Qml.source = qml/Test
 Qml.target = qml
 Ressources.source = res
-Ressources.target = ./
+Ressources.target = qml/Test
 Android.source = android
-Android.target = ./
+Android.target = qml/Test
 DEPLOYMENTFOLDERS = Qml Ressources Android
 
 # Additional import path used to resolve QML modules in Creator's code model
@@ -17,7 +17,7 @@ SOURCES += main.cpp \
     wtemp.cpp
 
 # Installation path
-# target.path =
+#target.path =
 
 # Please do not modify the following two lines. Required for deployment.
 include(qtquick2applicationviewer/qtquick2applicationviewer.pri)
