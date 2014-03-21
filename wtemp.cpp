@@ -74,7 +74,7 @@ QVariant WtempModel::data(const QModelIndex &index, int role) const {
     if(index.row() < 0 || index.row() > list_element->count()) {
         return QVariant();
     }
-    if(role == Qt::DisplayRole) {
+    if(role == SrcRole) {
         return list_element->at(index.row())->getSrc();
     }
     return QVariant();
@@ -90,3 +90,13 @@ bool WtempModel::setData(const QModelIndex &index, const QVariant &value, int ro
     }
     return false;
 }
+
+int WtempModel::size() {
+    return list_element->size();
+}
+
+QVariant WtempModel::get(const int i) {
+    return list_element->at(i)->getSrc();
+}
+
+

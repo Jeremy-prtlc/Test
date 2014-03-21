@@ -20,7 +20,7 @@ Rectangle {
         anchors.leftMargin: 0
         anchors.top: parent.top
         anchors.topMargin: 0
-        source: "../../res/leftarrow.png"
+        source: "../res/leftarrow.png"
     }
 
     Image {
@@ -33,7 +33,7 @@ Rectangle {
         anchors.top: backArrow_mainLayout.top
         anchors.topMargin: 0
         fillMode: Image.PreserveAspectFit
-        source: "../../res/wtemp.png"
+        source: "../res/wtemp.png"
     }
 
     MouseArea {
@@ -65,7 +65,7 @@ Rectangle {
         anchors.right: mainLayout.right
         anchors.rightMargin: 0
         fillMode: Image.PreserveAspectFit
-        source: "../../res/gallery.png"
+        source: "../res/gallery.png"
     }
 
     MouseArea {
@@ -135,6 +135,7 @@ Rectangle {
                 anchors.topMargin: 0
                 anchors.left: itemDelegate_listViewGallery_mainLayout.left
                 anchors.leftMargin: 5
+                anchors.verticalCenter: itemDelegate_listViewGallery_mainLayout.verticalCenter
                 activeFocusOnPress: true
                 checked: false
                 onCheckedChanged: {
@@ -146,7 +147,7 @@ Rectangle {
                 objectName: "text_itemDelegate_listViewGallery_mainLayout"
                 width:  listViewGalleryBackground_mainLayout.length
                 height: itemDelegate_listViewGallery_mainLayout.height
-                color: "#2f4eb7"
+                color: "#307dd7"
                 text: qsTr(name)
                 font.bold: false
                 font.family: "Verdana"
@@ -159,7 +160,8 @@ Rectangle {
                 anchors.topMargin: 0
                 anchors.left: radioButton_itemDelegate_listViewGallery_mainLayout.right
                 anchors.leftMargin: 20
-                font.pixelSize: 16
+                anchors.verticalCenter: radioButton_itemDelegate_listViewGallery_mainLayout.verticalCenter
+                font.pixelSize: 20
                 MouseArea {
                     id: textListener_itemDelegate_listViewGallery_mainLayout
                     objectName: "textListener_itemDelegate_listViewGallery_mainLayout"
@@ -189,8 +191,8 @@ Rectangle {
             return max;
         }
         property int length: listViewGalleryBackground_mainLayout.max() * 15
-        width: 20 + length
-        height: listModelModel_listViewGallery_mainLayout.count * (25+5)
+        width: 25 + length
+        height: listModelModel_listViewGallery_mainLayout.count * (40+5)
         x: 5
         z: 100
         color: "#444444"
@@ -234,14 +236,27 @@ Rectangle {
                 anchors.leftMargin: 0
                 anchors.top: item_componentDelegate_galleryGridListView_mainLayout.top
                 anchors.topMargin: 0
-                source: src
+                source: "../" + src
+            }
+            MouseArea {
+                id: imageListener_item_componentDelegate_galleryGridListView_mainLayout
+                objectName: "imageListener_item_componentDelegate_galleryGridListView_mainLayout"
+                width: image_item_componentDelegate_galleryGridListView_mainLayout.width
+                height: image_item_componentDelegate_galleryGridListView_mainLayout.height
+                anchors.top: image_item_componentDelegate_galleryGridListView_mainLayout.top
+                anchors.topMargin: 0
+                anchors.left: image_item_componentDelegate_galleryGridListView_mainLayout.left
+                anchors.leftMargin: 0
+                onClicked: {
+                    console.log("Clique sur image : " + image_item_componentDelegate_galleryGridListView_mainLayout.source)
+                }
             }
         }
     }
 
     /********************************************************************
      * Auto-généré par le C++,
-     * peut-être une  : ListView  GridView  PathView   GridView(custom)
+     * peut être une  : ListView  GridView  PathView   GridView(custom)
      * respectivement : liste     grille    exploreur  galerie
      **/
     GridView {

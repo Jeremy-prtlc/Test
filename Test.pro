@@ -1,6 +1,6 @@
 # Add more folders to ship with the application, here
-Qml.source = qml/Test
-Qml.target = qml
+Qml.source = qml
+Qml.target = ./
 Ressources.source = res
 Ressources.target = ./
 Android.source = android

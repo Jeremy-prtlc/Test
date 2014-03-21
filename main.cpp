@@ -12,13 +12,14 @@ int main(int argc, char *argv[]) {
     // Instancie la liste des images.
     MainActivity* main = new MainActivity();
     // parcours le dossier path et récupère les fichiers à partir du chemin et filtre précisé.
-    main->findWtemp("./", (QStringList() << "*.jpg" << "*.png" << "*.bmp" << "*.gif"));
+    // "./res" work on Desktop deployed
+    main->findWtemp("./android-build/assets/res", (QStringList() << "*.jpg" << "*.png" << "*.bmp" << "*.gif" << "*.wtemp"));
     // affiche dans le log le contenue de la liste des images trouvées.
     qDebug() << main->listToString();
 
     WtempModel *wtempModel = new WtempModel(main->getList());
-/*    // crée un itérateur sur la liste des images
-    QListIterator<Wtemp*> qlitw(main->getList());
+    // crée un itérateur sur la liste des images
+/*    QListIterator<Wtemp*> qlitw(main->getList());
     while(qlitw.hasNext()) {
         // ajoute pour chaque image un : ListElement { src: "getSrc<QString>()" }
         wtempModel.addWtemp(Wtemp(qlitw.next()->getSrc()));
@@ -27,7 +28,7 @@ int main(int argc, char *argv[]) {
     // ajoute notre model au root (context)
     viewer.rootContext()->setContextProperty("listModelModel_galleryGridListView_mainLayout", wtempModel);
     // définie le QML principal
-    viewer.setMainQmlFile(QStringLiteral("qml/Test/MainActivity.qml"));
+    viewer.setMainQmlFile(QStringLiteral("qml/MainActivity.qml"));
     // permet l'affichage du QML
     viewer.showExpanded();
 

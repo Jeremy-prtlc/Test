@@ -41,6 +41,8 @@ public:
      int rowCount(const QModelIndex &parent = QModelIndex()) const;
      QVariant data(const QModelIndex &index, int role) const;
      bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
+     int size();
+     QVariant get(const int i);
 
 private:
      QList<Wtemp*> *list_element;
